@@ -1,4 +1,6 @@
+import http from "http";
 import express from "express";
+import WebSocket from "ws";
 
 const app = express();
 
@@ -14,4 +16,10 @@ const handleListening = () => {
   console.log(`🎸 Listening on http://localhost:${PORT}`);
 };
 
-app.listen(PORT, handleListening);
+// app.listen(PORT, handleListening);
+
+const server = http.createServer(app); // this is a http server
+const wss = new WebSocket.Server({ server });
+// now wss and server are listening to save PORT
+
+server.listen(PORT, handleListening);
